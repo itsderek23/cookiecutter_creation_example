@@ -2,12 +2,17 @@
 # https://github.com/settings/tokens
 # Scopes: delete_repo, repo
 
+# Exit on error. https://unix.stackexchange.com/questions/309339/how-to-exit-a-shell-script-if-one-part-of-it-fails
+set -e
+
 echo "Deleting GitHub Repo if it exists="$GITHUB_USERNAME/$PROJECT_NAME
 curl -X DELETE -H 'Authorization: token '$GITHUB_TOKEN \
 https://api.github.com/repos/$GITHUB_USERNAME/$PROJECT_NAME
 
 echo "Generating project=$PROJECT_NAME"
 rm -Rf $PROJECT_NAME > /dev/null
+# ../cookiecutter-data-science/ is the path to the forked github repo:
+# https://github.com/itsderek23/cookiecutter-data-science
 cookiecutter --no-input ../cookiecutter-data-science/ project_name=$PROJECT_NAME
 cd $PROJECT_NAME
 
@@ -21,9 +26,8 @@ git commit -m "Inital project structure" > /dev/null
 echo "Creating src/util directory"
 mkdir src/util
 
-echo "Copying existing notebooks and scripts"
+echo "Copying existing notebook and scripts"
 cp ../explore.ipynb notebooks/.
-cp ../prepare_train.ipynb notebooks/.
 cp ../notebook_imports.py src/util/.
 cp ../dataset.py src/util/.
 cp ../download*.sh src/data/
@@ -37,7 +41,7 @@ pip install -r requirements.txt > /dev/null
 echo "Making dataset scripts executable"
 chmod 755 src/data/*.sh
 
-echo "Commiting progress"
+echo "Committing progress"
 git add . > /dev/null
 git commit -m "Added project requirements and project files" > /dev/null
 
@@ -62,7 +66,7 @@ dvc run -d src/data/download_glove.sh \
 echo "Invoking exploratory notebook"
 inv notebooks.run notebooks/explore.ipynb
 
-echo "Commiting progress"
+echo "Committing progress"
 git add . > /dev/null
 git commit -m "Added dvc download stages" > /dev/null
 
@@ -78,16 +82,29 @@ echo "Create and run the training stage"
 dvc run -d data/raw/train.csv \
         -d data/raw/glove.6B.100d.txt \
         -d src/models/train.py \
-        -o models/model.h \
+        -o models/model.h5 \
         -o models/tokenizer.pickle \
         -f train.dvc \
         python src/models/train.py
 
-echo "Commiting progress"
+echo "Committing progress"
 git add . > /dev/null
 git commit -m "Added dvc train stage" > /dev/null
 
+echo "Implementing the Model Wrapper"
+cp ../model_wrapper.py src/models/model_wrapper.py
+echo "Testing model invoke"
+inv model.predict ["Theyd probably still show more life than Arsenal did yesterday, eh? EH?","Just happened a terrible car crash"]
+
+echo "Committing progress"
+git add . > /dev/null
+git commit -m "Implemented the model wrapper" > /dev/null
+
+echo "Adding project-specific info to the README"
+cp ../README_GENERATED_PROJECT.md README.md
+echo "Committing progress"
+git add . > /dev/null
+git commit -m "Adding project-specific info to the README" > /dev/null
+
 # TODO
-# Invoke the model with inv model.predict
-# Try the web service?
 # Show how to use as a Python package?
