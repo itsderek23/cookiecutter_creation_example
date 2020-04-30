@@ -2,15 +2,14 @@
 # https://github.com/settings/tokens
 # Scopes: delete_repo, repo
 
-PROJECT_NAME='disaster_tweets'
-
 echo "Deleting GitHub Repo if it exists="$GITHUB_USERNAME/$PROJECT_NAME
 curl -X DELETE -H 'Authorization: token '$GITHUB_TOKEN \
 https://api.github.com/repos/$GITHUB_USERNAME/$PROJECT_NAME
 
 echo "Generating project=$PROJECT_NAME"
 rm -Rf $PROJECT_NAME > /dev/null
-cookiecutter --no-input ../cookiecutter-data-science/ PROJECT_NAME=$PROJECT_NAME
+extras="PROJECT_NAME="$PROJECT_NAME
+cookiecutter --no-input ../cookiecutter-data-science/ $extras
 cd $PROJECT_NAME
 
 echo "Activating venv"
