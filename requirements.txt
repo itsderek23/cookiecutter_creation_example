@@ -1,0 +1,11 @@
+tensorflow-cpu
+kaggle==1.5.6
+gensim==3.8.2
+keras==2.3.1
+matplotlib==3.2.1
+nltk==3.5
+numpy==1.18.2
+pandas==1.0.3
+scikit_learn==0.22.2.post1
+seaborn==0.10.0
+tqdm==4.45.0

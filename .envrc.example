@@ -1,0 +1,7 @@
+# To enable:
+# direnv allow .
+
+# https://github.com/settings/tokens
+export GITHUB_TOKEN=[YOUR TOKEN]
+export GITHUB_USERNAME=[YOUR GITHUB USERNAME]
+export PROJECT_NAME=disaster_tweets
