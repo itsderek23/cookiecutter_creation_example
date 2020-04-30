@@ -245,6 +245,6 @@ history=model.fit(X_train,y_train,batch_size=4,epochs=15,validation_data=(X_test
 # In[ ]:
 
 
-model.save("../models/model.h5")
-with open('../models/tokenizer.pickle', 'wb') as handle:
+model.save("models/model.h5")
+with open('models/tokenizer.pickle', 'wb') as handle:
     pickle.dump(tokenizer_obj, handle, protocol=pickle.HIGHEST_PROTOCOL)
