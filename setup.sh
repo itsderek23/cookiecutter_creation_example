@@ -8,8 +8,7 @@ https://api.github.com/repos/$GITHUB_USERNAME/$PROJECT_NAME
 
 echo "Generating project=$PROJECT_NAME"
 rm -Rf $PROJECT_NAME > /dev/null
-extras="PROJECT_NAME="$PROJECT_NAME
-cookiecutter --no-input ../cookiecutter-data-science/ $extras
+cookiecutter --no-input ../cookiecutter-data-science/ project_name=$PROJECT_NAME
 cd $PROJECT_NAME
 
 echo "Activating venv"
