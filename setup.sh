@@ -109,5 +109,9 @@ git add . > /dev/null
 git commit -m "Adding project-specific info to the README" > /dev/null
 git push
 
+# Can run the following to pin exact package versions. However, it requires some manual processing
+# of the output and is more involved to script.
+# pip freeze -r requirements.txt 
+
 # TODO
 # Show how to use as a Python package?
