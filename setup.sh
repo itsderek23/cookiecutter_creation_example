@@ -90,6 +90,7 @@ dvc run -d data/raw/train.csv \
 echo "Committing progress"
 git add . > /dev/null
 git commit -m "Added dvc train stage" > /dev/null
+git push
 
 echo "Implementing the Model Wrapper"
 cp ../model_wrapper.py src/models/model_wrapper.py
@@ -99,12 +100,14 @@ inv model.predict "Theyd probably still show more life than Arsenal did yesterda
 echo "Committing progress"
 git add . > /dev/null
 git commit -m "Implemented the model wrapper" > /dev/null
+git push
 
 echo "Adding project-specific info to the README"
 cp ../README_GENERATED_PROJECT.md README.md
 echo "Committing progress"
 git add . > /dev/null
 git commit -m "Adding project-specific info to the README" > /dev/null
+git push
 
 # TODO
 # Show how to use as a Python package?
