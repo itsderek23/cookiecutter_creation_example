@@ -11,7 +11,8 @@ The following is required to run this project:
 ## Setup
 
 1. Run `scripts/install.py`. The install script creates a `venv`, installs the Python dependencies specified, and initializes DVC.
-2. Download the latest data files: `dvc pull`.
+2. Activate the venv: `source venv/bin/activate`
+3. Download the latest data files: `dvc pull`.
 
 ## Quickstart
 
