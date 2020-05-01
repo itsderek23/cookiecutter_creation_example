@@ -38,6 +38,5 @@ class ModelWrapper:
         sequences = self.tokenizer.texts_to_sequences(texts)
         processed_texts = pad_sequences(sequences,maxlen=MAX_LEN,truncating='post',padding='post')
         result = self.model.predict(processed_texts)
-        print(texts,result)
 
         return result

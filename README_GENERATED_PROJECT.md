@@ -18,7 +18,8 @@ The following is required to run this project:
 After running setup, invoke the model from the command line:
 
 ```
-inv model.predict ["Theyd probably still show more life than Arsenal did yesterday, eh? EH?","Just happened a terrible car crash"]
+inv model.predict "Theyd probably still show more life than Arsenal did yesterday, eh? EH?"
+inv model.predict "Just happened a terrible car crash"
 ```
 
 ## Available commands

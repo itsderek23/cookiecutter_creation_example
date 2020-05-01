@@ -94,7 +94,7 @@ git commit -m "Added dvc train stage" > /dev/null
 echo "Implementing the Model Wrapper"
 cp ../model_wrapper.py src/models/model_wrapper.py
 echo "Testing model invoke"
-inv model.predict ["Theyd probably still show more life than Arsenal did yesterday, eh? EH?","Just happened a terrible car crash"]
+inv model.predict "Theyd probably still show more life than Arsenal did yesterday, eh? EH?"
 
 echo "Committing progress"
 git add . > /dev/null
